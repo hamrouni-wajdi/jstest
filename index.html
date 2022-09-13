@@ -117,7 +117,7 @@ function initialize()
 	let geometry1 = new THREE.PlaneBufferGeometry(1,1, 4,4);
 	let loader = new THREE.TextureLoader();
 	let texture = loader.load( '/markers/hiro.png', render );
-	let material1 = new THREE.MeshBasicMaterial( { color: 0x0000ff, opacity: 0.5 } );
+	let material1 = new THREE.MeshBasicMaterial( { color: 0x0000ff, opacity: 0.5, map: texture  } );
 	mesh1 = new THREE.Mesh( geometry1, material1 );
 	mesh1.rotation.x = -Math.PI/2;
 	markerRoot1.add( mesh1 );
@@ -134,7 +134,7 @@ function initialize()
 				.setPath( 'models/' )
 				.load( 'fish.obj', function ( group ) {
 					mesh0 = group.children[0];
-					// mesh0.material.side = THREE.DoubleSide;
+					 mesh0.material.side = THREE.DoubleSide;
 					mesh0.position.y = 0.25;
 					mesh0.scale.set(0.25,0.25,0.25);
 					markerRoot1.add(mesh0);
@@ -167,13 +167,13 @@ function animate()
 }
 
 </script>
-<script src="https://aframe.io/releases/0.7.1/aframe.min.js"></script>
+<!-- <script src="https://aframe.io/releases/0.7.1/aframe.min.js"></script> -->
 
-<a-scene>
+<!-- <a-scene>
 
-  <!-- <a-box position = "2 1 -3" material="src:./markers/hiro.png"></a-box>, -->
-   <a-box position = "-2 1 -3" material="src:./models/fish_texture.png"></a-box>
+  <a-box position = "2 1 -3" material="src:./markers/hiro.png"></a-box>, -->
+   <!-- <a-box position = "-2 1 -3" material="src:./models/fish_texture.png"></a-box> -->
 
-</a-scene>
+<!-- </a-scene> --> 
 </body>
 </html>

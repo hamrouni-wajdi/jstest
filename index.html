@@ -16,7 +16,7 @@
 	<script src="threex/threex-armarkercontrols.js"></script>
 </head>
 
-<body style=' margin : 0px; overflow: hidden; font-family: Monospace;'>
+<body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
 
 <!-- 
   Example created by Lee Stemkoski: https://github.com/stemkoski
@@ -43,8 +43,7 @@ function initialize()
 	let ambientLight = new THREE.AmbientLight( 0xcccccc, 1.0 );
 	scene.add( ambientLight );
 				
-	// camera = new THREE.Camera();
-	const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+	camera = new THREE.Camera();
 	scene.add(camera);
 
 	renderer = new THREE.WebGLRenderer({
@@ -111,17 +110,16 @@ function initialize()
 	// build markerControls
 	markerRoot1 = new THREE.Group();
 	scene.add(markerRoot1);
-	let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, camera, {
+	let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
 		type: 'pattern', patternUrl: "data/hiro.patt",
 	})
 
 	let geometry1 = new THREE.PlaneBufferGeometry(1,1, 4,4);
 	let loader = new THREE.TextureLoader();
-	let texture = loader.load( '/markers/hiro.png', render );
-	let material1 = new THREE.MeshBasicMaterial( { color: 0x0000ff, opacity: 0.5, map: texture  } );
+	// let texture = loader.load( 'images/earth.jpg', render );
+	let material1 = new THREE.MeshBasicMaterial( { color: 0x0000ff, opacity: 0.5 } );
 	mesh1 = new THREE.Mesh( geometry1, material1 );
 	mesh1.rotation.x = -Math.PI/2;
-	mesh1.rotation.y=-0.1
 	markerRoot1.add( mesh1 );
 	
 	function onProgress(xhr) { console.log( (xhr.loaded / xhr.total * 100) + '% loaded' ); }
@@ -136,7 +134,7 @@ function initialize()
 				.setPath( 'models/' )
 				.load( 'fish.obj', function ( group ) {
 					mesh0 = group.children[0];
-					 mesh0.material.side = THREE.DoubleSide;
+					// mesh0.material.side = THREE.DoubleSide;
 					mesh0.position.y = 0.25;
 					mesh0.scale.set(0.25,0.25,0.25);
 					markerRoot1.add(mesh0);

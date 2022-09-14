@@ -17,20 +17,8 @@
 </head>
 
 <body>
-<span style="z-index: 2; position: absolute;">
-	<button id="fish" onclick="f('fish')"> fish</button>
-	<button id="pizza" onclick="f('pizza')"> Pizza</button>
-	<button onclick="f('chicken')" id="chicken"> Chicken</button>
-</span>
-	<script>
 
-		console.log(document.getElementById('chicken'))
-		
-		 function f(dish='fish'){
-			console.log(dish,[dishes[dish]['mtl'],dishes[dish]['obj']])
-			return [dishes[dish]['mtl'],dishes[dish]['obj']]
-		}
-		</script>
+
 	<div style='margin : 0px;overflow: hidden;  font-family: Monospace;'>
 <!-- 
   Example created by Lee Stemkoski: https://github.com/stemkoski
@@ -44,13 +32,20 @@ var scene, camera, renderer, clock, deltaTime, totalTime;
 var arToolkitSource, arToolkitContext;
 
 var markerRoot1;
-
+var d ='pizza'
 var mesh1;
 const dishes = {
 fish:{obj:'fish.obj',mtl:'fish.mtl'},
 chicken:{obj:'chicken.obj',mtl:'chicken.mtl'},
 pizza:{obj:'pizza.obj',mtl:'pizza.mtl'}
 }
+function f(dish){
+			console.log(dish,[dishes[dish]['mtl'],dishes[dish]['obj']])
+			d = dish
+			console.log(d)
+			return [dishes[dish]['mtl'],dishes[dish]['obj']]
+			initialize()
+		}
 initialize();
 animate();
 
@@ -140,17 +135,22 @@ function initialize()
 	mesh1.rotation.x = -Math.PI/2;
 	markerRoot1.add( mesh1 );
 	
-	function onProgress(xhr) { console.log( (xhr.loaded / xhr.total * 100) + '% loaded' ); }
+	
+	
+
+}
+function onProgress(xhr) { console.log( (xhr.loaded / xhr.total * 100) + '% loaded' ); }
 	function onError(xhr) { console.log( 'An error happened' ); }
 	
-	new THREE.MTLLoader()
+function waj (d,o){
+		new THREE.MTLLoader()
 		.setPath( 'models/' )
-		.load( dishes['fish']['mtl'], function ( materials ) {
+		.load(d || 'fish.mtl', function ( materials ) {
 			materials.preload();
 			new THREE.OBJLoader()
 				.setMaterials( materials )
-				.setPath( 'models/' )
-				.load( dishes['fish']['obj'], function ( group ) {
+				.setPath( 'models/')
+				.load(o ||'fish.obj', function ( group ) {
 					mesh0 = group.children[0];
 					// mesh0.material.side = THREE.DoubleSide;
 					mesh0.position.y = 0.25;
@@ -158,7 +158,8 @@ function initialize()
 					markerRoot1.add(mesh0);
 				}, onProgress, onError );
 		});
-}
+	}
+waj('pizza.mtl','pizza.obj')
 
 
 
@@ -188,7 +189,11 @@ function animate()
 }
 
 </script>
-
+<span style="z-index: 2; position: absolute;">
+	<button id="fish" onclick="f('fish')"> fish</button>
+	<button id="pizza" onclick="f('pizza')"> Pizza</button>
+	<button onclick="f('chicken')" id="chicken"> Chicken</button>
+</span>
 </div>
 </body>
 </html>

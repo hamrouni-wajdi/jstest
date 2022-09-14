@@ -43,7 +43,8 @@ function initialize()
 	let ambientLight = new THREE.AmbientLight( 0xcccccc, 1.0 );
 	scene.add( ambientLight );
 				
-	camera = new THREE.Camera();
+	// camera = new THREE.Camera();
+	const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 	scene.add(camera);
 
 	renderer = new THREE.WebGLRenderer({
@@ -110,7 +111,7 @@ function initialize()
 	// build markerControls
 	markerRoot1 = new THREE.Group();
 	scene.add(markerRoot1);
-	let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
+	let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, camera, {
 		type: 'pattern', patternUrl: "data/hiro.patt",
 	})
 
@@ -168,13 +169,13 @@ function animate()
 }
 
 </script>
-<script src="https://aframe.io/releases/0.7.1/aframe.min.js"></script>
+<!-- <script src="https://aframe.io/releases/0.7.1/aframe.min.js"></script>
 
 <a-scene>
 
   <a-box position = "2 1 -3" material="src:./markers/hiro.png"></a-box>
    <a-box position = "-2 1 -3" material="src:./models/fish_texture.png"></a-box> 
-
- </a-scene> 
+   
+ </a-scene>  -->
 </body>
 </html>

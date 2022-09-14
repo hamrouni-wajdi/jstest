@@ -16,8 +16,22 @@
 	<script src="threex/threex-armarkercontrols.js"></script>
 </head>
 
-<body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
+<body>
+<span style="z-index: 2; position: absolute;">
+	<button id="fish" onclick="f('fish')"> fish</button>
+	<button id="pizza" onclick="f('pizza')"> Pizza</button>
+	<button onclick="f('chicken')" id="chicken"> Chicken</button>
+</span>
+	<script>
 
+		console.log(document.getElementById('chicken'))
+		
+		 function f(dish='fish'){
+			console.log(dish,[dishes[dish]['mtl'],dishes[dish]['obj']])
+			return [dishes[dish]['mtl'],dishes[dish]['obj']]
+		}
+		</script>
+	<div style='margin : 0px;overflow: hidden;  font-family: Monospace;'>
 <!-- 
   Example created by Lee Stemkoski: https://github.com/stemkoski
   Based on the AR.js library and examples created by Jerome Etienne: https://github.com/jeromeetienne/AR.js/
@@ -32,7 +46,11 @@ var arToolkitSource, arToolkitContext;
 var markerRoot1;
 
 var mesh1;
-
+const dishes = {
+fish:{obj:'fish.obj',mtl:'fish.mtl'},
+chicken:{obj:'chicken.obj',mtl:'chicken.mtl'},
+pizza:{obj:'pizza.obj',mtl:'pizza.mtl'}
+}
 initialize();
 animate();
 
@@ -127,12 +145,12 @@ function initialize()
 	
 	new THREE.MTLLoader()
 		.setPath( 'models/' )
-		.load( 'fish.mtl', function ( materials ) {
+		.load( dishes['fish']['mtl'], function ( materials ) {
 			materials.preload();
 			new THREE.OBJLoader()
 				.setMaterials( materials )
 				.setPath( 'models/' )
-				.load( 'fish.obj', function ( group ) {
+				.load( dishes['fish']['obj'], function ( group ) {
 					mesh0 = group.children[0];
 					// mesh0.material.side = THREE.DoubleSide;
 					mesh0.position.y = 0.25;
@@ -141,6 +159,9 @@ function initialize()
 				}, onProgress, onError );
 		});
 }
+
+
+
 
 
 function update()
@@ -168,5 +189,6 @@ function animate()
 
 </script>
 
+</div>
 </body>
 </html>

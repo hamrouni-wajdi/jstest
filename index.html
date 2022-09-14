@@ -117,7 +117,7 @@ function initialize()
 
 	let geometry1 = new THREE.PlaneBufferGeometry(1,1, 4,4);
 	let loader = new THREE.TextureLoader();
-	let texture = loader.load( '/markers/hiro.png', render );
+	let texture = loader.load( '/models/fish_texture.png', render );
 	let material1 = new THREE.MeshBasicMaterial( { color: 0x0000ff, opacity: 0.5, map: texture  } );
 	mesh1 = new THREE.Mesh( geometry1, material1 );
 	mesh1.rotation.x = -Math.PI/2;
